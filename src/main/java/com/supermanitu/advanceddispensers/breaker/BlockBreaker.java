@@ -1,13 +1,14 @@
 package com.supermanitu.advanceddispensers.breaker;
 
 import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
+import com.supermanitu.advanceddispensers.lib.IHasSubtypes;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersMod;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
-public class BlockBreaker extends BlockAdvancedDispensers
+public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtypes
 {
 	public BlockBreaker() 
 	{
@@ -27,6 +28,18 @@ public class BlockBreaker extends BlockAdvancedDispensers
 	public String getName()
 	{
 		return "blockbreaker";
+	}
+
+	@Override
+	public int countSubtypes() 
+	{
+		return 2;
+	}
+
+	@Override
+	public String getVariation(int i)
+	{
+		return "normal";
 	}
 	
 	private Object getItemByTier()
