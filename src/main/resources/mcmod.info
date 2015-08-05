@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "advanceddispensers",
+  "name": "Advanced Dispensers Mod",
+  "description": "A mod that adds a few extra blocks for automation",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["SuperManitu", "Paperpyro"],
+  "credits": "Code and concept by SuperManitu, Textures by Paperpyro",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
