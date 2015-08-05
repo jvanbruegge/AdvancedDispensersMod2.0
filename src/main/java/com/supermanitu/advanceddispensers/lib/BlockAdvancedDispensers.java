@@ -9,4 +9,7 @@ public abstract class BlockAdvancedDispensers extends Block
 	{
 		super(material);
 	}
+	
+	public abstract Object[] getRecipe();
+	public abstract String getName();
 }
