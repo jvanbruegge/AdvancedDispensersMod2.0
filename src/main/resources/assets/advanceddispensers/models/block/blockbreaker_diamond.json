@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_bottom",
+        "up": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_top",
+        "north": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_side",
+        "east": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_side",
+        "south": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_side",
+        "west": "advanceddispensers:blocks/blockbreaker/blockbreaker_diamond_side",
+        "particle": "advanceddispensers:blocks/blockbreaker/blockbreaker_iron_bottom"
+    }
+}

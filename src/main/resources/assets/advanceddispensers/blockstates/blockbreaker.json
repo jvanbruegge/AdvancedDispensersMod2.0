@@ -1,0 +1,17 @@
+{
+    "variants": 
+    {
+        "facing=up,tier=iron": { "model": "advanceddispensers:blockbreaker_iron"},
+        "facing=down,tier=iron": { "model": "advanceddispensers:blockbreaker_iron", "x": 180},
+        "facing=north,tier=iron": { "model": "advanceddispensers:blockbreaker_iron", "x" : 90},
+        "facing=east,tier=iron": { "model": "advanceddispensers:blockbreaker_iron", "x": 90, "y": 90},
+        "facing=south,tier=iron": { "model": "advanceddispensers:blockbreaker_iron", "x": 270},
+        "facing=west,tier=iron": { "model": "advanceddispensers:blockbreaker_iron", "x": 90, "y": 270},
+        "facing=up,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond"},
+        "facing=down,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond", "x": 180},
+        "facing=north,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond", "x": 90},
+        "facing=east,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond", "x": 90, "y": 90},
+        "facing=south,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond", "x": 270},
+        "facing=west,tier=diamond": { "model": "advanceddispensers:blockbreaker_diamond", "x": 90, "y": 270}
+    }
+}
