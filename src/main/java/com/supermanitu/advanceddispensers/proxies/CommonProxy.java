@@ -15,7 +15,7 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent e) 
     {
-
+    	AdvancedDispensersBlocks.addRecipes();
     }
 
     public void postInit(FMLPostInitializationEvent e)

@@ -14,6 +14,7 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,6 +25,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -100,7 +102,14 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	@Override
 	public Object[] getRecipe()
 	{
-		return new Object[]{"XZX","ZOZ","BYB", 'Z', Items.redstone, 'Y', Blocks.piston, 'X', Items.iron_ingot, 'O', this.getItemByTier(), 'B', Blocks.stone};
+		return null;
+	}
+	
+	@Override
+	public void addRecipes()
+	{
+		GameRegistry.addRecipe(new ItemStack(this, 1, 0), new Object[]{"XZX","ZOZ","BYB", 'Z', Items.redstone, 'Y', Blocks.piston, 'X', Items.iron_ingot, 'O', Items.iron_pickaxe, 'B', Blocks.stone});
+		GameRegistry.addRecipe(new ItemStack(this, 1, 1), new Object[]{"XZX","ZOZ","BYB", 'Z', Items.redstone, 'Y', Blocks.piston, 'X', Items.iron_ingot, 'O', Items.diamond_pickaxe, 'B', Blocks.stone});
 	}
 
 	@Override
@@ -131,10 +140,5 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	public Class<? extends ItemBlock> getItemBlock()
 	{
 		return ItemBlockBreaker.class;
-	}
-	
-	private Object getItemByTier()
-	{
-		return Items.iron_pickaxe;
 	}
 }
