@@ -12,4 +12,6 @@ public interface IHasSubtypes
 	public Class<? extends ItemBlock> getItemBlock();
 	
 	public void addRecipes();
+	
+	public int countSubtypes();
 }

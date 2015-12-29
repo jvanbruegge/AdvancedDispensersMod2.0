@@ -19,7 +19,7 @@ public final class AdvancedDispensersBlocks
 	{
 		for(BlockAdvancedDispensers block : blocks)
 		{
-			if(block.countSubtypes() > 1)
+			if(block instanceof IHasSubtypes)
 			{
 				GameRegistry.registerBlock(block, ((IHasSubtypes)block).getItemBlock(), block.getName());
 			}
@@ -34,7 +34,7 @@ public final class AdvancedDispensersBlocks
 	{
 		for(BlockAdvancedDispensers block : blocks)
 		{
-			if(block.countSubtypes() > 1)
+			if(block instanceof IHasSubtypes)
 			{
 				((IHasSubtypes)block).addRecipes();
 			}
@@ -49,7 +49,7 @@ public final class AdvancedDispensersBlocks
 	{
 		for(BlockAdvancedDispensers block : blocks)
 		{
-			if(block.countSubtypes() > 1)
+			if(block instanceof IHasSubtypes)
 			{
 				Item item = GameRegistry.findItem("advanceddispensers", block.getName());
 				((IHasSubtypes)block).addVariantName(item);
@@ -62,9 +62,9 @@ public final class AdvancedDispensersBlocks
 		for(BlockAdvancedDispensers block : blocks)
 		{
 			Item itemBlock = GameRegistry.findItem("advanceddispensers", block.getName());
-			if(block.countSubtypes() > 1)
+			if(block instanceof IHasSubtypes)
 			{
-				for(int i = 0; i < block.countSubtypes(); i++)
+				for(int i = 0; i < ((IHasSubtypes)block).countSubtypes(); i++)
 				{
 					ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(((IHasSubtypes)block).getVariantName(i), "inventory");
 				    Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, i, itemModelResourceLocation);

@@ -54,5 +54,4 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 	
 	public abstract Object[] getRecipe();
 	public abstract String getName();
-	public abstract int countSubtypes();
 }
