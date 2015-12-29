@@ -18,9 +18,11 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
@@ -51,7 +53,6 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
 		list.add(new ItemStack(item, 1, 0));
@@ -140,5 +141,11 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	public Class<? extends ItemBlock> getItemBlock()
 	{
 		return ItemBlockBreaker.class;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta)
+	{
+		return new TileEntityBreaker();
 	}
 }
