@@ -36,7 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtypes
 {
 	public static final PropertyEnum PROPERTYTIER = PropertyEnum.create("tier", BreakerTier.class);
-	public static final PropertyEnum PROPERTYFACING = PropertyEnum.create("facing", EnumFacing.class);
 	
 	public BlockBreaker() 
 	{
@@ -64,21 +63,18 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.getFront(meta & 0x7);
 		BreakerTier tier = (meta & 0x8) == 0 ? BreakerTier.Iron : BreakerTier.Diamond;
-		return this.getDefaultState().withProperty(PROPERTYTIER, tier).withProperty(PROPERTYFACING, facing);
+		return super.getStateFromMeta(meta).withProperty(PROPERTYTIER, tier);
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		EnumFacing facing = (EnumFacing)state.getValue(PROPERTYFACING);
 		BreakerTier tier = (BreakerTier)state.getValue(PROPERTYTIER);
 		
-		int facingbits = facing.getIndex();
 		int tierbit = tier == BreakerTier.Iron ? 0x0 : 0x8;
 		
-		return tierbit | facingbits;
+		return tierbit | super.getMetaFromState(state);
 	}
 	
 	@Override
@@ -97,19 +93,8 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing blockFaceClickedOn, float hitX, float hitY, float hitZ, int meta, EntityLivingBase player)
 	{
 		BreakerTier tier = meta  == 0 ? BreakerTier.Iron : BreakerTier.Diamond;
-		EnumFacing facing = BlockPistonBase.getFacingFromEntity(world, pos, player);
 		
-		return this.getDefaultState().withProperty(PROPERTYFACING, facing).withProperty(PROPERTYTIER, tier);
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (!world.isRemote) 
-		{
-	        player.openGui(AdvancedDispensersMod.instance, AdvancedDispensersGuiHandler.BREAKER_GUI, world, pos.getX(), pos.getY(), pos.getZ());
-	    }
-	    return true;
+		return super.onBlockPlaced(world, pos, blockFaceClickedOn, hitX, hitY, hitZ, meta, player).withProperty(PROPERTYTIER, tier);
 	}
 
 	@Override
@@ -159,5 +144,11 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityBreaker();
+	}
+
+	@Override
+	protected int getGuiID()
+	{
+		return AdvancedDispensersGuiHandler.BREAKER_GUI;
 	}
 }
