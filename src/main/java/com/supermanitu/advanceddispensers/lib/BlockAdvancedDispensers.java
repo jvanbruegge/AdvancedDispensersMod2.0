@@ -1,5 +1,7 @@
 package com.supermanitu.advanceddispensers.lib;
 
+import java.util.Random;
+
 import com.supermanitu.advanceddispensers.breaker.BreakerTier;
 import com.supermanitu.advanceddispensers.breaker.TileEntityBreaker;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
@@ -92,6 +94,34 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 	        player.openGui(AdvancedDispensersMod.instance, this.getGuiID(), world, pos.getX(), pos.getY(), pos.getZ());
 	    }
 	    return true;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
+	{
+		world.scheduleUpdate(pos, this, this.tickRate(world));
+	}
+	
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+    {
+        if (!world.isRemote)
+        {
+        	if (world.isBlockPowered(pos) || world.isBlockPowered(pos.up()))
+    		{
+        		((TileEntityAdvancedDispensers)world.getTileEntity(pos)).onReceiveRedstoneSignal(world, pos, state, rand);
+    		}
+        	else
+        	{
+        		((TileEntityAdvancedDispensers)world.getTileEntity(pos)).onNotReceiveRedstoneSignal(world, pos, state, rand);
+        	}
+        }
+    }
+	
+	@Override
+	public int tickRate(World world)
+	{
+		return 4;
 	}
 	
 	@Override

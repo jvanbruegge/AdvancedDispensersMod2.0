@@ -1,19 +1,27 @@
 package com.supermanitu.advanceddispensers.lib;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.world.World;
 
 public abstract class TileEntityAdvancedDispensers extends TileEntity implements IInventory
 {
 	private ItemStack[] inventory;
 	private String customName;
+	
+	private boolean wasActive = false;
 	
 	public TileEntityAdvancedDispensers(ItemStack[] inventory)
 	{
@@ -216,6 +224,22 @@ public abstract class TileEntityAdvancedDispensers extends TileEntity implements
 	    {
 	        this.setCustomName(nbt.getString("CustomName"));
 	    }
+	}
+	
+	public final void onReceiveRedstoneSignal(World world, BlockPos pos, IBlockState state, Random rand)
+	{
+		if(this instanceof IReceiveRedstone) ((IReceiveRedstone)this).onReceiveRedstoneSignal(world, pos, state, rand);
+		
+		if(this instanceof IReceiveRedstoneOnce && !wasActive) 
+		{
+			((IReceiveRedstoneOnce)this).onReceiveRedstoneSignalOnce(world, pos, state, rand);
+			wasActive = true;
+		}
+	}
+	
+	public final void onNotReceiveRedstoneSignal(World world, BlockPos pos, IBlockState state, Random rand)
+	{
+		wasActive = false;
 	}
 	
 	protected abstract String getUnlocalizedName();
