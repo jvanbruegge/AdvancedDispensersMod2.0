@@ -6,33 +6,40 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
 public abstract class TileEntityAdvancedDispensers extends TileEntity implements IInventory
 {
 	private ItemStack[] inventory;
+	private String customName;
 	
 	public TileEntityAdvancedDispensers(ItemStack[] inventory)
 	{
 		this.inventory = inventory;
 	}
 
-	@Override
-	public String getName() 
-	{
-		return null;
-	}
+	public String getName()
+    {
+        return this.hasCustomName() ? this.customName : this.getUnlocalizedName();
+    }
+
+    public void setCustomName(String customName)
+    {
+        this.customName = customName;
+    }
 
 	@Override
 	public boolean hasCustomName() 
 	{
-		return false;
+		return this.customName != null;
 	}
 
 	@Override
 	public IChatComponent getDisplayName() 
 	{
-		return null;
+		return (IChatComponent)(this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName(), new Object[0]));
 	}
 
 	@Override
@@ -185,6 +192,11 @@ public abstract class TileEntityAdvancedDispensers extends TileEntity implements
 	        }
 	    }
 	    nbt.setTag("Items", list);
+	    
+	    if (this.hasCustomName())
+	    {
+	        nbt.setString("CustomName", this.getName());
+	    }
 	}
 
 	@Override
@@ -199,5 +211,12 @@ public abstract class TileEntityAdvancedDispensers extends TileEntity implements
 	        int slot = stackTag.getByte("Slot") & 255;
 	        this.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
 	    }
+	    
+	    if (nbt.hasKey("CustomName", 8)) 
+	    {
+	        this.setCustomName(nbt.getString("CustomName"));
+	    }
 	}
+	
+	protected abstract String getUnlocalizedName();
 }

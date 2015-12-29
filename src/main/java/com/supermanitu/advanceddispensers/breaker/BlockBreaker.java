@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
 import com.supermanitu.advanceddispensers.lib.IHasSubtypes;
+import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersMod;
 
 import net.minecraft.block.BlockPistonBase;
@@ -16,6 +17,7 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
@@ -98,6 +100,16 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 		EnumFacing facing = BlockPistonBase.getFacingFromEntity(world, pos, player);
 		
 		return this.getDefaultState().withProperty(PROPERTYFACING, facing).withProperty(PROPERTYTIER, tier);
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
+		if (!world.isRemote) 
+		{
+	        player.openGui(AdvancedDispensersMod.instance, AdvancedDispensersGuiHandler.BREAKER_GUI, world, pos.getX(), pos.getY(), pos.getZ());
+	    }
+	    return true;
 	}
 
 	@Override
