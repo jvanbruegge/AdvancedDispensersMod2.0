@@ -2,7 +2,7 @@ package com.supermanitu.advanceddispensers.breaker;
 
 import java.util.List;
 
-import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
+import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensersOrientable;
 import com.supermanitu.advanceddispensers.lib.IHasSubtypes;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersMod;
@@ -33,7 +33,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtypes
+public class BlockBreaker extends BlockAdvancedDispensersOrientable implements IHasSubtypes
 {
 	public static final PropertyEnum PROPERTYTIER = PropertyEnum.create("tier", BreakerTier.class);
 	

@@ -1,5 +1,6 @@
 package com.supermanitu.advanceddispensers.main;
 
+import com.supermanitu.advanceddispensers.autocrafting.BlockAutoCrafting;
 import com.supermanitu.advanceddispensers.breaker.BlockBreaker;
 import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
 import com.supermanitu.advanceddispensers.lib.ConfigAdvancedDispensers;
@@ -30,12 +31,14 @@ public final class AdvancedDispensersBlocks
 		
 		configs = new ConfigAdvancedDispensers[] {
 				new ConfigAdvancedDispensers(config, "User"),
-				new ConfigAdvancedDispensers(config, "Breaker")
+				new ConfigAdvancedDispensers(config, "Breaker"),
+				new ConfigAdvancedDispensers(config, "AutomatedCraftingTable")
 		};
 		
 		blocks = new BlockAdvancedDispensers[] { 
 				new BlockUser(configs[0].getTick()),
-				new BlockBreaker(configs[1].getTick())
+				new BlockBreaker(configs[1].getTick()),
+				new BlockAutoCrafting(configs[2].getTick())
 		};
 		
 		this.config.save();

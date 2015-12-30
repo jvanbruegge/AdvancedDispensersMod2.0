@@ -1,6 +1,6 @@
 package com.supermanitu.advanceddispensers.user;
 
-import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
+import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensersOrientable;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
 
 import net.minecraft.block.material.Material;
@@ -9,7 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockUser extends BlockAdvancedDispensers
+public class BlockUser extends BlockAdvancedDispensersOrientable
 {
 	public BlockUser(int tickRate)
 	{

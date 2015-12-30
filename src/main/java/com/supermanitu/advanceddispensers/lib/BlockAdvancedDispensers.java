@@ -27,9 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BlockAdvancedDispensers extends BlockContainer
-{
-	public static final PropertyEnum PROPERTYFACING = PropertyEnum.create("facing", EnumFacing.class);
-	
+{	
 	private int tickRate;
 	
 	public BlockAdvancedDispensers(int tickRate, Material material) 
@@ -63,34 +61,6 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 	public int getRenderType()
 	{
 		return 3;
-	}
-	
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		EnumFacing facing = EnumFacing.getFront(meta & 0x7);
-		return this.getDefaultState().withProperty(PROPERTYFACING, facing);
-	}
-	
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		EnumFacing facing = (EnumFacing)state.getValue(PROPERTYFACING);
-		return facing.getIndex();
-	}
-	
-	@Override
-	protected BlockState createBlockState()
-	{
-		return new BlockState(this, new IProperty[] {PROPERTYFACING});
-	}
-	
-	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing blockFaceClickedOn, float hitX, float hitY, float hitZ, int meta, EntityLivingBase player)
-	{
-		EnumFacing facing = BlockPistonBase.getFacingFromEntity(world, pos, player);
-		
-		return this.getDefaultState().withProperty(PROPERTYFACING, facing);
 	}
 	
 	@Override

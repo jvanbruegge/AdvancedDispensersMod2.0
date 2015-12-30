@@ -4,3 +4,5 @@ tile.blockbreaker_iron.name=Eisenabreißer
 tile.blockbreaker_diamond.name=Diamantabreißer
 
 tile.blockuser.name=Benutzer
+
+tile.blockautocrafting.name=Automatisierte Werkbank

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_bottom",
+        "up": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_top",
+        "north": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_side",
+        "east": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_side",
+        "south": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_side",
+        "west": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_side",
+        "particle": "advanceddispensers:blocks/blockautocrafting/blockautocrafting_side"
+    }
+}

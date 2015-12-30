@@ -4,3 +4,5 @@ tile.blockbreaker_iron.name=Iron Breaker
 tile.blockbreaker_diamond.name=Diamond Breaker
 
 tile.blockuser.name=User
+
+tile.blockautocrafting.name=Automated Crafting Table
