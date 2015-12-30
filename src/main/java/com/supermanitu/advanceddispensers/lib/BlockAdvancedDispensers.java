@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.supermanitu.advanceddispensers.breaker.BreakerTier;
 import com.supermanitu.advanceddispensers.breaker.TileEntityBreaker;
+import com.supermanitu.advanceddispensers.main.AdvancedDispensersBlocks;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersMod;
 

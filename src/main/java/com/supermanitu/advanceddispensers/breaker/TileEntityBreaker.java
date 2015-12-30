@@ -82,8 +82,9 @@ public class TileEntityBreaker extends TileEntityAdvancedDispensers implements I
 			{
 				DropHelper.spawnItemStack(world, pos, stack);
 			}
-
+			blockInFront.breakBlock(world, frontPos, stateInFront);
 			world.setBlockToAir(frontPos);
+			
 		}
 	}
 
