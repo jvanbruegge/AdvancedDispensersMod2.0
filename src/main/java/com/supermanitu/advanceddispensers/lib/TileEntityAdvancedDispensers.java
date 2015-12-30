@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public abstract class TileEntityAdvancedDispensers extends TileEntity implements IInventory
 {
-	private ItemStack[] inventory;
+	protected ItemStack[] inventory;
 	private String customName;
 	
 	private boolean wasActive = false;

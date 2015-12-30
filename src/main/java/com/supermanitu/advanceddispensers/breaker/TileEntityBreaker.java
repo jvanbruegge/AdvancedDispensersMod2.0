@@ -1,13 +1,18 @@
 package com.supermanitu.advanceddispensers.breaker;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
+import com.supermanitu.advanceddispensers.helper.DropHelper;
 import com.supermanitu.advanceddispensers.lib.IReceiveRedstoneOnce;
 import com.supermanitu.advanceddispensers.lib.TileEntityAdvancedDispensers;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -33,15 +38,70 @@ public class TileEntityBreaker extends TileEntityAdvancedDispensers implements I
 		BlockPos frontPos = new BlockPos(pos.getX() + facing.getFrontOffsetX(), pos.getY() + facing.getFrontOffsetY(), pos.getZ() + facing.getFrontOffsetZ());
 		Block blockInFront = world.getBlockState(frontPos).getBlock();
 
-		List<ItemStack> drops = blockInFront.getDrops(world, pos, state, 0);
+		List<ItemStack> drops = blockInFront.getDrops(world, frontPos, world.getBlockState(frontPos), 0);
+		List<ItemStack> remainingDrops = (List<ItemStack>) new ArrayList(drops).clone();
 
 		for(ItemStack stack : drops)
 		{
-			System.out.println(stack.getDisplayName());
+			for(ItemStack inventoryStack : inventory)
+			{
+				if(inventoryStack != null && inventoryStack.getItem().equals(stack.getItem()) && inventoryStack.getMaxStackSize() > inventoryStack.stackSize)
+				{
+					inventoryStack.stackSize++;
+					remainingDrops.remove(stack);
+					break;
+				}
+			}
+		}
+		
+		List<ItemStack> collapsedDrops = collapseStacks(remainingDrops);
+		List<ItemStack> collapsedDropsCopy = (List<ItemStack>) new ArrayList(collapsedDrops).clone();
+		
+		for(ItemStack stack : collapsedDrops)
+		{
+			for(int i = 0; i < inventory.length; i++)
+			{
+				if(inventory[i] == null)
+				{
+					this.setInventorySlotContents(i, stack);
+					collapsedDropsCopy.remove(stack);
+					break;
+				}
+			}
+		}
+		
+		for(ItemStack stack : collapsedDropsCopy)
+		{
+			DropHelper.spawnItemStack(world, pos, stack);
 		}
 
-		//TODO: Add drops to inventory
-
 		world.setBlockToAir(frontPos);
+	}
+
+	private List<ItemStack> collapseStacks(List<ItemStack> remainingDrops) 
+	{
+		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+		
+		for(ItemStack stack : remainingDrops)
+		{
+			boolean added = false;
+			
+			for(ItemStack listStack : list)
+			{
+				if(stack.getItem().equals(listStack.getItem()))
+				{
+					listStack.stackSize++;
+					added = true;
+					break;
+				}
+			}
+			
+			if(!added)
+			{
+				list.add(stack);
+			}
+		}
+		
+		return list;
 	}
 }
