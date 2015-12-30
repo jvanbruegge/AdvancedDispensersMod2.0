@@ -36,46 +36,55 @@ public class TileEntityBreaker extends TileEntityAdvancedDispensers implements I
 	{
 		EnumFacing facing = (EnumFacing) state.getValue(BlockBreaker.PROPERTYFACING);
 		BlockPos frontPos = new BlockPos(pos.getX() + facing.getFrontOffsetX(), pos.getY() + facing.getFrontOffsetY(), pos.getZ() + facing.getFrontOffsetZ());
-		Block blockInFront = world.getBlockState(frontPos).getBlock();
+		IBlockState stateInFront = world.getBlockState(frontPos);
+		Block blockInFront = stateInFront.getBlock();
 
-		List<ItemStack> drops = blockInFront.getDrops(world, frontPos, world.getBlockState(frontPos), 0);
-		List<ItemStack> remainingDrops = (List<ItemStack>) new ArrayList(drops).clone();
-
-		for(ItemStack stack : drops)
+		BreakerTier tier = (BreakerTier) state.getValue(BlockBreaker.PROPERTYTIER);
+		
+		if(blockInFront.getBlockHardness(world, frontPos) == -1) return; //If block is unbreakable
+		
+		if((tier.getName().equals("iron") && blockInFront.getHarvestLevel(stateInFront) <= 2)
+				|| (tier.getName().equals("diamond") && blockInFront.getHarvestLevel(stateInFront) <= 3))
 		{
-			for(ItemStack inventoryStack : inventory)
+			List<ItemStack> drops = blockInFront.getDrops(world, frontPos, world.getBlockState(frontPos), 0);
+			List<ItemStack> remainingDrops = (List<ItemStack>) new ArrayList(drops).clone();
+
+			for(ItemStack stack : drops)
 			{
-				if(inventoryStack != null && inventoryStack.getItem().equals(stack.getItem()) && inventoryStack.getMaxStackSize() > inventoryStack.stackSize)
+				for(ItemStack inventoryStack : inventory)
 				{
-					inventoryStack.stackSize++;
-					remainingDrops.remove(stack);
-					break;
+					if(inventoryStack != null && inventoryStack.getItem().equals(stack.getItem()) && inventoryStack.getMaxStackSize() > inventoryStack.stackSize)
+					{
+						inventoryStack.stackSize++;
+						remainingDrops.remove(stack);
+						break;
+					}
 				}
 			}
-		}
-		
-		List<ItemStack> collapsedDrops = collapseStacks(remainingDrops);
-		List<ItemStack> collapsedDropsCopy = (List<ItemStack>) new ArrayList(collapsedDrops).clone();
-		
-		for(ItemStack stack : collapsedDrops)
-		{
-			for(int i = 0; i < inventory.length; i++)
+			
+			List<ItemStack> collapsedDrops = collapseStacks(remainingDrops);
+			List<ItemStack> collapsedDropsCopy = (List<ItemStack>) new ArrayList(collapsedDrops).clone();
+			
+			for(ItemStack stack : collapsedDrops)
 			{
-				if(inventory[i] == null)
+				for(int i = 0; i < inventory.length; i++)
 				{
-					this.setInventorySlotContents(i, stack);
-					collapsedDropsCopy.remove(stack);
-					break;
+					if(inventory[i] == null)
+					{
+						this.setInventorySlotContents(i, stack);
+						collapsedDropsCopy.remove(stack);
+						break;
+					}
 				}
 			}
-		}
-		
-		for(ItemStack stack : collapsedDropsCopy)
-		{
-			DropHelper.spawnItemStack(world, pos, stack);
-		}
+			
+			for(ItemStack stack : collapsedDropsCopy)
+			{
+				DropHelper.spawnItemStack(world, pos, stack);
+			}
 
-		world.setBlockToAir(frontPos);
+			world.setBlockToAir(frontPos);
+		}
 	}
 
 	private List<ItemStack> collapseStacks(List<ItemStack> remainingDrops) 
