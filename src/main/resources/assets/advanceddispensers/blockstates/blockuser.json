@@ -1,0 +1,11 @@
+{
+    "variants":
+    {
+        "facing=up": { "model": "advanceddispensers:blockuser_up"},
+        "facing=down": { "model": "advanceddispensers:blockuser_down"},
+        "facing=north": { "model": "advanceddispensers:blockuser"},
+        "facing=east": { "model": "advanceddispensers:blockuser", "y": 90},
+        "facing=south": { "model": "advanceddispensers:blockuser", "y": 180},
+        "facing=west": { "model": "advanceddispensers:blockuser", "y": 270}
+    }
+}

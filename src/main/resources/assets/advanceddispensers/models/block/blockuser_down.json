@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "advanceddispensers:blocks/blockuser/blockuser_front_bottom",
+        "up": "advanceddispensers:blocks/blockuser/blockuser_top",
+        "north": "advanceddispensers:blocks/blockuser/blockuser_side",
+        "east": "advanceddispensers:blocks/blockuser/blockuser_side",
+        "south": "advanceddispensers:blocks/blockuser/blockuser_side",
+        "west": "advanceddispensers:blocks/blockuser/blockuser_side",
+        "particle": "advanceddispensers:blocks/blockuser/blockuser_side"
+    }
+}

@@ -32,6 +32,8 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 	public BlockAdvancedDispensers(Material material) 
 	{
 		super(material);
+		this.setCreativeTab(AdvancedDispensersMod.advancedDispensersTab);
+		this.setUnlocalizedName(getName());
 	}
 	
 	@SideOnly(Side.CLIENT)

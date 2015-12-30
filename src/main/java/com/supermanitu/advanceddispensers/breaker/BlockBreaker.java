@@ -40,8 +40,6 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 	public BlockBreaker() 
 	{
 		super(Material.rock);
-		this.setUnlocalizedName(getName());
-		this.setCreativeTab(AdvancedDispensersMod.advancedDispensersTab);
 		this.setHarvestLevel("pickaxe", 1);
 	}
 	
