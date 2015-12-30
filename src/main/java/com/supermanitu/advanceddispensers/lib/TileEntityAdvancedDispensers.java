@@ -33,11 +33,6 @@ public abstract class TileEntityAdvancedDispensers extends TileEntity implements
         return this.hasCustomName() ? this.customName : this.getUnlocalizedName();
     }
 
-    public void setCustomName(String customName)
-    {
-        this.customName = customName;
-    }
-
 	@Override
 	public boolean hasCustomName() 
 	{
@@ -236,7 +231,26 @@ public abstract class TileEntityAdvancedDispensers extends TileEntity implements
 			wasActive = true;
 		}
 	}
+
+	public void setCustomName(String customName)
+	{
+		this.customName = customName;
+	}
+
+	public ItemStack[] getInventory()
+	{
+		return inventory;
+	}
 	
+	public void deleteEmptyStacks()
+	{
+		for(int i = 0; i < inventory.length; i++)
+		{
+			if(inventory[i] != null && inventory[i].stackSize == 0) inventory[i] = null;
+		}
+		this.markDirty();
+	}
+
 	public final void onNotReceiveRedstoneSignal(World world, BlockPos pos, IBlockState state, Random rand)
 	{
 		wasActive = false;

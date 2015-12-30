@@ -37,9 +37,9 @@ public class BlockBreaker extends BlockAdvancedDispensers implements IHasSubtype
 {
 	public static final PropertyEnum PROPERTYTIER = PropertyEnum.create("tier", BreakerTier.class);
 	
-	public BlockBreaker() 
+	public BlockBreaker(int tickRate) 
 	{
-		super(Material.rock);
+		super(tickRate, Material.rock);
 		this.setHarvestLevel("pickaxe", 1);
 	}
 	

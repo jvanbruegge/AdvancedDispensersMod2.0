@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 
 public class BlockUser extends BlockAdvancedDispensers
 {
-	public BlockUser()
+	public BlockUser(int tickRate)
 	{
-		super(Material.rock);
+		super(tickRate, Material.rock);
 		this.setHarvestLevel("pickaxe", 1);
 	}
 

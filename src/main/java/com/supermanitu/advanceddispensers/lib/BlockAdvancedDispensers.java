@@ -29,11 +29,15 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 {
 	public static final PropertyEnum PROPERTYFACING = PropertyEnum.create("facing", EnumFacing.class);
 	
-	public BlockAdvancedDispensers(Material material) 
+	private int tickRate;
+	
+	public BlockAdvancedDispensers(int tickRate, Material material) 
 	{
 		super(material);
 		this.setCreativeTab(AdvancedDispensersMod.advancedDispensersTab);
 		this.setUnlocalizedName(getName());
+		
+		this.tickRate = tickRate;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -123,7 +127,7 @@ public abstract class BlockAdvancedDispensers extends BlockContainer
 	@Override
 	public int tickRate(World world)
 	{
-		return 4;
+		return tickRate;
 	}
 	
 	@Override

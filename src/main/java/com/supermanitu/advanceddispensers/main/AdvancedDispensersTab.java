@@ -13,6 +13,6 @@ public class AdvancedDispensersTab extends CreativeTabs
 	@Override
 	public Item getTabIconItem() 
 	{
-		return Item.getItemFromBlock(AdvancedDispensersBlocks.getTabIcon());
+		return Item.getItemFromBlock(AdvancedDispensersBlocks.instance().getTabIcon());
 	}
 }
