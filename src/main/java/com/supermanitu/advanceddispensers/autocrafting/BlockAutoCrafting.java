@@ -1,5 +1,7 @@
 package com.supermanitu.advanceddispensers.autocrafting;
 
+import java.util.Random;
+
 import com.supermanitu.advanceddispensers.lib.BlockAdvancedDispensers;
 import com.supermanitu.advanceddispensers.main.AdvancedDispensersGuiHandler;
 
@@ -39,5 +41,6 @@ public class BlockAutoCrafting extends BlockAdvancedDispensers
 	{
 		return AdvancedDispensersGuiHandler.AUTOCRAFTING_GUI;
 	}
-
+	
+	
 }
