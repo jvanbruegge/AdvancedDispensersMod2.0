@@ -7,12 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ContainerBreaker extends ContainerAdvancedDispensers
 {
-	public ContainerBreaker(IInventory player, TileEntityAdvancedDispensers tileEntity) 
+	public ContainerBreaker(IInventory player, TileEntityAdvancedDispensers tileEntity, World world) 
 	{
-		super(player, tileEntity);
+		super(player, tileEntity, world);
 		
 		// Tile Entity, Slot 0-8, Slot IDs 0-8
 	    for (int y = 0; y < 3; ++y)

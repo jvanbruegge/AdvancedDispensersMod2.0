@@ -1,5 +1,7 @@
 package com.supermanitu.advanceddispensers.main;
 
+import com.supermanitu.advanceddispensers.autocrafting.ContainerAutoCrafting;
+import com.supermanitu.advanceddispensers.autocrafting.GuiAutoCrafting;
 import com.supermanitu.advanceddispensers.breaker.ContainerBreaker;
 import com.supermanitu.advanceddispensers.breaker.GuiBreaker;
 import com.supermanitu.advanceddispensers.breaker.TileEntityBreaker;
@@ -18,7 +20,9 @@ public class AdvancedDispensersGuiHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
 	{
 		if(ID == BREAKER_GUI || ID == USER_GUI)
-			return new ContainerBreaker(player.inventory, (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)));
+			return new ContainerBreaker(player.inventory, (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)), world);
+		else if(ID == AUTOCRAFTING_GUI)
+			return new ContainerAutoCrafting(player.inventory, (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)), world);
 		return null;
 	}
 
@@ -27,14 +31,17 @@ public class AdvancedDispensersGuiHandler implements IGuiHandler
 	{
 		if(ID == BREAKER_GUI || ID == USER_GUI)
 		{
-			try 
-			{
-				return new GuiBreaker(player.inventory,  (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)));
-			} 
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+			try {
+				return new GuiBreaker(player.inventory,  (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)), world); } 
+			catch (Exception e)	{
+				e.printStackTrace(); }
+		}
+		else if(ID == AUTOCRAFTING_GUI)
+		{
+			try {
+				return new GuiAutoCrafting(player.inventory,  (TileEntityAdvancedDispensers) world.getTileEntity(new BlockPos(x, y, z)), world); } 
+			catch (Exception e)	{
+				e.printStackTrace(); }
 		}
 		return null;
 	}

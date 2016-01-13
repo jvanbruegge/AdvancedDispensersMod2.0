@@ -5,14 +5,17 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public abstract class ContainerAdvancedDispensers extends Container
 {
 	protected TileEntityAdvancedDispensers tileEntity;
+	protected World world;
 	
-	public ContainerAdvancedDispensers(IInventory player, TileEntityAdvancedDispensers tileEntity)
+	public ContainerAdvancedDispensers(IInventory player, TileEntityAdvancedDispensers tileEntity, World world)
 	{
 		this.tileEntity = tileEntity;
+		this.world = world;
 	}
 	
 	@Override
